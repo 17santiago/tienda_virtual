@@ -1,0 +1,87 @@
+from flask import Flask, jsonify, render_template, request, redirect, url_for, session
+import json
+import os
+
+ 
+app = Flask(__name__)
+app.secret_key = 'secreto123'  # necesario para el carrito
+ 
+DB_FILE = 'productos.json'
+ 
+# Funciones auxiliares para cargar y guardar productos
+def cargar_productos():
+    if not os.path.exists(DB_FILE):
+        with open(DB_FILE, 'w') as f:
+            json.dump([], f)
+    with open(DB_FILE, 'r') as f:
+        return json.load(f)
+ 
+def guardar_productos(productos):
+    with open(DB_FILE, 'w') as f:
+        json.dump(productos, f, indent=4)
+
+def leer_productos():
+    if os.path.exists(DB_FILE):
+       with open(DB_FILE, 'r') as f:
+         return json.load(f)        
+       return []
+    
+
+def escribir_productos(data):
+    with open(DB_FILE, 'w') as f:
+        json.dump(data, f, indent=4)
+
+
+
+@app.route('/')
+def index():
+    productos = cargar_productos()
+    return render_template('index.html', productos=productos)
+
+@app.route('/admin')
+def admin():    
+    return render_template('admin.html')
+
+
+@app.route('/api/productos', methods=['GET'])
+def get_producto():
+    return jsonify(leer_productos())
+
+@app.route('/api/productos/<int:id>', methods=['DELETE'])
+def eliminar_producto(id):
+    productos = leer_productos()
+    productos = [p for p in productos if p['id'] != id]
+    escribir_productos(productos)
+    return jsonify({'message': 'Producto eliminado '}),200
+
+
+@app.route('/api/productos', methods=['POST'])
+def agregar_producto():
+    productos = leer_productos()
+    nuevo = request.json
+    nuevo['id'] = max([p['id'] for p in productos], default=0) + 1
+    productos.append(nuevo)
+    escribir_productos(productos)
+    return jsonify(nuevo), 201
+
+
+@app.route('/api/productos/<int:id>', methods=['PUT'])
+def editar_producto(id):
+    productos = leer_productos()
+    for p in productos:
+        if p['id'] == id:
+            
+            p.update(request.json)
+            escribir_productos(productos)
+            return jsonify(p), 
+    return jsonify({'error': 'Producto no encontrado'}), 404
+ 
+#@app.route('/')
+#def inicio():
+    #return "Hola desde Flask!"
+ 
+if __name__ == '__main__':
+     app.run(debug=True)
+ 
+
+ 

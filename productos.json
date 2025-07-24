@@ -1,0 +1,51 @@
+[
+    {
+        "nombre": "Camisa Azul",
+        "precio": "80000",
+        "desc": "Camisa para 15",
+        "imagen": "../static/assets/camisa.jpg",
+        "id": 2
+    },
+    {
+        "nombre": "Pantaloneta",
+        "precio": "95000",
+        "desc": "pantaloneta azul oscuro",
+        "imagen": "../static/assets/pantaloneta.jpg",
+        "id": 3
+    },
+    {
+        "nombre": "Baggy Jeans",
+        "precio": "82000",
+        "desc": "Pantalon con estilo",
+        "imagen": "../static/assets/baggy.jpg",
+        "id": 4
+    },
+    {
+        "nombre": "Buzo con capucha",
+        "precio": "120000",
+        "desc": "Buzo con capucha para el frio que esta haciendo",
+        "imagen": "../static/assets/buzo.jpg",
+        "id": 5
+    },
+    {
+        "nombre": "zapatos",
+        "precio": "100000",
+        "desc": "Zapatos con estilo",
+        "imagen": "../static/assets/zapatillas.jpg",
+        "id": 6
+    },
+    {
+        "nombre": "Gorra New era",
+        "precio": "80000",
+        "desc": "Gorra chimba",
+        "imagen": "../static/assets/gorra.jpg",
+        "id": 7
+    },
+    {
+        "nombre": "Botas Timberland",
+        "precio": 80000,
+        "desc": "Botas con estilo",
+        "imagen": "../static/assets/timberland.jpg",
+        "id": 8
+    }
+]
