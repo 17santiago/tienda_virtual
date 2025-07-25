@@ -72,7 +72,7 @@ def ver_carrito():
     return render_template('carrito.html', 
                          productos=productos_carrito, 
                          total=total)
-# Rutas modificadas para usar formularios tradicionales
+
 @app.route('/agregar_al_carrito', methods=['POST'])
 def agregar_al_carrito():
     producto_id = str(request.form.get('producto_id'))
